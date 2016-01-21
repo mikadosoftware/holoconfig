@@ -1,0 +1,41 @@
+#!/bin/env python
+
+'''
+The goal of this project is to supply a reusable config
+library, that can expand to cope with distributed and remote config
+
+The intention with holodeck is to build a set of compents that allow
+me to build, wrap and deploy python packages in LXC containers or in just venvs with minimum fuss
+
+As such we are expecting to pass around and promote immutable 'containers' (lxc or venvs) and will need ways for these to pick themselves 
+up and configure themselves
+
+Global config naming convention
+-------------------------------
+
+All names will have the pypi package namespace as the top level.::
+
+    pyholodeck
+
+Then each package can define its own, unique within the packge set of 
+variables::
+
+    pyholodeck.listen.port
+    pyholodeck.foo.bar
+
+Every config item will always be storeable as a text file in the .ini format, and will be held in process as a plain python dict.
+
+I will not at all support other formatsm the temptation to put executable code in config should be resisted at all costs.
+
+
+
+'''
+
+from ConfigParser import SafeConfigParser
+
+
+def configme(pkg_name):
+    '''Given a pkg name, can I get the two possible locations to 
+       gather config
+    '''
+    
